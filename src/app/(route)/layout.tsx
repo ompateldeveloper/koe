@@ -2,7 +2,7 @@
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import classNames from "classnames";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { AudioLines, ChevronLeft, ChevronRight, EqualSquareIcon, Music, X } from "lucide-react";
 import { ScrollArea } from "radix-ui";
@@ -52,7 +52,9 @@ export default function Layout({
                 </motion.div>
                 {/* <div className="absolute w-96 h-full bg-zinc-800 top-0 -right-[calc(calc(var(--spacing)*96)-calc(var(--spacing)*10))] rounded-l-2xl"></div> */}
             </div>
-            <Footer />
+            <Suspense fallback={null}>
+                <Footer />
+            </Suspense>
         </div>
     );
 }
