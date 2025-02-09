@@ -19,10 +19,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
         const song = await prisma.song.findUnique({
-            where: { id: params.id },
+            where: { id: (await params).id },
         });
 
         if (!song) {
@@ -34,7 +34,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
         // Delete the song from the database
         await prisma.song.delete({
-            where: { id: params.id },
+            where: { id: (await params).id },
         });
 
         return NextResponse.json({ message: "Song deleted successfully" });
