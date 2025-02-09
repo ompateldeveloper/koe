@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
         const playlist = await prisma.playlist.findUnique({
-            where: { id: params.id },
+            where: { id: (await params).id },
             include: { songs: true },
         });
 
