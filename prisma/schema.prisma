@@ -3,18 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Song {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   title     String
   artist    String
   ipfsHash  String
   url       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   playlists Playlist[]
 }
 
