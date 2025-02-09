@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { pinata } from "@/lib/pinata";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
         const song = await prisma.song.findUnique({
-            where: { id: params.id },
+            where: { id: (await params).id },
         });
 
         if (song) {
