@@ -1,7 +1,10 @@
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import React from "react";
 
 export default function Page() {
-  return (
-    <div className=''>Page</div>
-  )
+    return (
+        <div className="">
+            <canvas></canvas>
+        </div>
+    );
 }

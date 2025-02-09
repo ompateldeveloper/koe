@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Song {
+  id        String   @id @default(cuid())
+  title     String
+  artist    String
+  ipfsHash  String
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  playlists Playlist[]
+}
+
+model Playlist {
+  id        String   @id @default(cuid())
+  name      String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  songs     Song[]
+}
