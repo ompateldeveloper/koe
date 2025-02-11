@@ -15,7 +15,6 @@ export default function Footer() {
     const [isMuted, setIsMuted] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const { currentTrack, setTrack, setDuration } = useAudioStore();
-    if (!id) return;
     // Initialize the player with the provided URL
     useEffect(() => {
         if (id) {
@@ -62,6 +61,7 @@ export default function Footer() {
         setVolume(value[0]);
     };
 
+    if (!id) return;
     return (
         <footer className=" fixed bottom-0 w-full bg-background border-t border-t-zinc-800 bg-zinc-900">
             {/* <div className="[&_button]:p-3">
