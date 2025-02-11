@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     experimental: {
         // Enable Server Actions (if not already enabled)
         serverActions: {
-            bodySizeLimit: "25mb",
+            bodySizeLimit: "200mb",
             allowedOrigins: ["*"],
         },
     },
