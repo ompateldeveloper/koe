@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 interface AudioState {
     currentTrack: {
         id: string;
-        name: string;
+        title: string;
         url: string;
         artist?: string;
         cover?: string;
@@ -19,6 +19,7 @@ interface AudioState {
         duration?: number;
     }>;
     setTrack: (track: AudioState["currentTrack"]) => void;
+    setDuration: (duration: number) => void;
     addToPlaylist: (track: AudioState["playlist"][0]) => void;
     removeFromPlaylist: (id: string) => void;
     clearPlaylist: () => void;
@@ -26,10 +27,23 @@ interface AudioState {
 
 const useAudioStore = create<AudioState>()(
     persist(
-        (set) => ({
-            currentTrack: null,
+        (set, get) => ({
+            currentTrack: {
+                id: "",
+                title: "",
+                url: "",
+                artist: "",
+                cover: "",
+                duration: 0,
+            },
             playlist: [],
             setTrack: (track) => set({ currentTrack: track }),
+            setDuration: (duration) => {
+                const currentTrack = get().currentTrack;
+                if (currentTrack) {
+                    set({ currentTrack: { ...currentTrack, duration } });
+                }
+            },
             addToPlaylist: (track) => set((state) => ({ playlist: [...state.playlist, track] })),
             removeFromPlaylist: (id) =>
                 set((state) => ({

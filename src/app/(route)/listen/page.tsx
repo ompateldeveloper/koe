@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import MusicList from "./MusicList";
 
 export default function Listen() {
-  return (
-    <div className='py-2 px-4'>Listen</div>
-  )
+    return (
+        <div className="px-8 md:px-16">
+            <MusicList />
+        </div>
+    );
 }
